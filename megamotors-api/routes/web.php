@@ -16,3 +16,13 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+
+    $router->get('', 'VehiclesController@listVehicles');
+    $router->get('{id}', 'VehiclesController@getVehicleById');
+    $router->post('', 'VehiclesController@createVehicle');
+    $router->put('{id}', 'VehiclesController@editVehicle');
+    $router->delete('{id}', 'VehiclesController@deleteVehicle');
+
+});
