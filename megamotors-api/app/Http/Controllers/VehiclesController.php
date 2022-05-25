@@ -34,14 +34,22 @@ class VehiclesController extends Controller
             'vendido' => 'required',
         ]);
 
-        $vehicle = Vehicle::create([
-            'veiculo' => $request->veiculo,
-            'marca' => $request->marca,
-            'ano' => $request->ano,
-            'descricao' => $request->descricao,
-            'vendido' => $request->vendido,
-        ]);
+        $vehicle = Vehicle::create($request->all());
         return response()
             ->json($vehicle, 201);
+    }
+
+    public function editVehicle(int $id, Request $request)
+    {
+        $vehicle = Vehicle::find($id);
+        if (is_null($vehicle)) {
+            return response()->json([
+                'erro' => 'Recurso não encontrado'
+            ], 404);
+        }
+        $vehicle->fill($request->all());
+        $vehicle->save();
+        return response()
+            ->json($vehicle, 200);
     }
 }

@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['prefix' => 'api/veiculos'], function () use ($router) {
 
     $router->get('', 'VehiclesController@listVehicles');
     $router->get('{id}', 'VehiclesController@getVehicleById');
