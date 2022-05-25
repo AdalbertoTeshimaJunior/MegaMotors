@@ -13,4 +13,9 @@ class Vehicle extends Model
         'descricao',
         'vendido'
     ];
+
+    public function getVendidoAttribute($vendido): bool
+    {
+        return $vendido;
+    }
 }

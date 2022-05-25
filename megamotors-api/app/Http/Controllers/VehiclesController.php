@@ -44,12 +44,24 @@ class VehiclesController extends Controller
         $vehicle = Vehicle::find($id);
         if (is_null($vehicle)) {
             return response()->json([
-                'erro' => 'Recurso não encontrado'
+                'erro' => 'Veículo não encontrado'
             ], 404);
         }
         $vehicle->fill($request->all());
         $vehicle->save();
         return response()
             ->json($vehicle, 200);
+    }
+
+    public function deleteVehicle(int $id)
+    {
+        $quantityRemoved = Vehicle::destroy($id);
+        if ($quantityRemoved === 0) {
+            return response()->json([
+                'erro' => 'Veículo não encontrado'
+            ], 404);
+        }
+        return response()
+            ->json('', 204);
     }
 }
