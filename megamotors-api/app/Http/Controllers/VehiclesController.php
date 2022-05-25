@@ -14,9 +14,14 @@ class VehiclesController extends Controller
             ->json(Vehicle::all(), 200);
     }
 
-    public function getVehicleById()
+    public function getVehicleById(int $id)
     {
+        $vehicle = Vehicle::find($id);
+        if (is_null($vehicle)) {
+            return response()->json('', 204);
+        }
 
+        return response()->json($vehicle);
     }
 
     public function createVehicle(Request $request)
